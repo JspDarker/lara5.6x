@@ -1,10 +1,9 @@
 <div class="navigat">
-    <h2>Product Best Special</h2>
+    <h2><span class="text-danger">{{ $categories_name }}</span> Best Product</h2>
     <div class="viewallcat">
-
-        <a href="https://www.thegioididong.com/dtdd-apple-iphone">Laptop</a>
-        <a href="https://www.thegioididong.com/dtdd-samsung">Phone</a>
-        <a href="http://thegioididong.com/dtdd?f=man-hinh-tran-vien">Tablet</a>
+        @foreach($cate as $c)
+            <a href="{{ url('tgdd/'.$c->url_type) }}">{{ $c->name }}</a>
+        @endforeach
         <a href="https://www.thegioididong.com/dtdd?p=tu-3-5-trieu">More</a>
         <a href="https://www.thegioididong.com/dtdd?s=tra-gop-0-phan-tram">Promotion price</a>
         <a href="/dtdd" class="mobile">Xem tất cả điện thoại</a>
@@ -12,23 +11,52 @@
 </div>
 <ul class="homeproduct">
 
-    @for($i = 0; $i <= 6; $i++)
-        <li>
-            <a href="/dtdd/iphone-x-256gb" >
-                <img width="180" height="180" src="https://cdn1.tgdd.vn/Products/Images/42/114111/iphone-x-256gb-a1-600x600-600x600-400x400.jpg">
+    @foreach($products as $p)
 
-                <h3>iPhone X 256GB Gray</h3>
-                <div class="price"><strong>34.790.000₫</strong><span>35.000.000₫</span></div>
+        @if($p->special != null)
+            <li class="feature" data-id="{{$p->id}}">
+                <a href="{{ url($type.'/'.$p->url_sp) }}">
+                    <img width="600" height="275" src="{{ asset('images/tgdd/'.$p->image) }}">
+                    <h3>{{ $p->name }}</h3>
+                    <div class="price">
+                        @if($p->promo_price > $p->price)
+                            <strong>{{number_format($p->price)}}₫</strong>
+                            <span>{{number_format($p->promo_price)}}₫</span>
+                            <label class="discount">GIẢM {{number_format($p->promo_price - $p->price)}}₫</label>
 
-                <div class="promo noimage">
-                    <p> Giảm 3 triệu thanh to&#225;n online bằng thẻ Mastercard và <b>3 K.mãi</b> khác</p>
-                </div>
+                        @else
+                            <strong>{{number_format($p->price)}}₫</strong>
+                        @endif
+                    </div>
 
-                <label class="discount">GIẢM 3.000.000₫</label>
-            </a>
-        </li>
+                </a>
+            </li>
+        @else
+            <li>
+                <a href="{{ url($type.'/'.$p->url_sp) }}" >
+                    <img width="180" height="180" src="{{ asset('images/tgdd/'.$p->image) }}">
 
-    @endfor
+                    <h3>{{ $p->name }}</h3>
+                    <div class="price">
+                        @if($p->promo_price > $p->price)
+                            <strong>{{number_format($p->price)}}₫</strong>
+                            <span>{{number_format($p->promo_price)}}₫</span>
+                            <label class="discount">GIẢM {{number_format($p->promo_price - $p->price)}}₫</label>
+
+                        @else
+                            <strong>{{number_format($p->price)}}₫</strong>
+                        @endif
+                    </div>
+
+                    {{--<div class="promo noimage">
+                        <p> Giảm 3 triệu thanh to&#225;n online bằng thẻ Mastercard và <b>3 K.mãi</b> khác</p>
+                    </div>--}}
+
+                </a>
+            </li>
+        @endif
+
+    @endforeach
     {{--<li>
         <a href="/dtdd/iphone-x-256gb-silver" >
             <img width="180" height="180" src="https://cdn4.tgdd.vn/Products/Images/42/172404/iphone-x-256gb-silver-400x400.jpg">
