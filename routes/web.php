@@ -16,10 +16,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::group(['prefix'=>'tgdd', 'middleware' => 'web'], function() {
     Route::get('/', 'PhoneController@index')->name('phone');
-
     Route::get('/{type}','PhoneController@girdProducts')->name('phone.girds');
-    //Route::get('line/{pro}')
+
+    Route::get('/{type}/{alias}/{id}','PhoneController@singleProduct')->name('phone.single');
 });

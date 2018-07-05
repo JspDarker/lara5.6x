@@ -23,6 +23,8 @@
 </head>
 <body>
 
+
+
     <section class=" ">
         <div id="main-header">
             @include('phone.includes.header')
@@ -30,7 +32,7 @@
 
             @yield('phone-index')
     </section>
-
+@yield('single')
 
 
 

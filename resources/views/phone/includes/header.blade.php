@@ -8,22 +8,12 @@
             <button class="btntop" type="submit"><i class="icontgdd-topsearch"></i></button>
         </form>
         <nav>
-
             @foreach($categories as $ca)
                 <a href="{{ route('phone.girds',$ca->url_type) }}" class="mobile" title="Điện thoại di động, smartphone">
                     <i class="{{ $ca->icon }}"></i>{{ $ca->name }}
                 </a>
             @endforeach
 
-            {{--<a href="/dtdd" class="mobile" title="Điện thoại di động, smartphone">
-                <i class="icontgdd-mobile"></i>Điện thoại
-            </a>
-            <a href="/may-tinh-bang" class="tablet" title="Máy tính bảng, tablet">
-                <i class="icontgdd-tablet"></i>Tablet
-            </a>
-            <a href="/laptop" class="laptop" title="Máy tính xách tay, Laptop">
-                <i class="icontgdd-laptop"></i>Laptop
-            </a>--}}
             <a href="/phu-kien" class="phukien" title="Phụ kiện điện thoại di động, phụ kiện tablet, phụ kiện lapto">
                 <i class="icontgdd-phukien"></i>Phụ kiện
             </a>
